@@ -19,7 +19,9 @@ function App() {
   }
 
   return (
-    <div id="app" style={{backgroundColor: color, transition: "all 1s ease"}} className='h-screen w-screen flex justify-center font-bold items-center'>
+    <div id="app" style={{backgroundColor: color, transition: "all 1s ease"}} 
+    className='h-screen w-screen flex justify-center font-bold items-center'
+    >
       <div id="quote-box" className='bg-white rounded-xl p-10 text-center shadow-2xl w-[700px]'>
         <p id="text" className='my-5' style={{color: color, transition: "all 1s ease"}}>{quote}</p>
         <p id="book-chapter" className='my-5' style={{color: color, transition: "all 1s ease", opacity: 70}}>{chapter}</p>
@@ -35,7 +37,7 @@ function App() {
           rounded-xl
           shadow-2xl
           hover:opacity-70'>
-            New Quote
+            New Verse
         </button>
       </div>
     </div>
