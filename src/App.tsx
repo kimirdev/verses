@@ -53,6 +53,7 @@ function App() {
       <div className="block fixed inset-x-0 bottom-0 z-10 bg-white shadow w-screen left-[50%] translate-x-[-50%] rounded-xl">
         <div className='flex justify-around'>
           <button style={{color: color, transition: 'all 1s ease'}} className='hover:opacity-70' onClick={() => handleLanguageChange('en')}>ENG</button>
+          <button style={{color: color, transition: 'all 1s ease'}} className='hover:opacity-70' onClick={() => handleLanguageChange('kor')}>KOR</button>
           <button style={{color: color, transition: 'all 1s ease'}} className='hover:opacity-70' onClick={() => handleLanguageChange('rus')}>RUS</button>
         </div>
       </div>

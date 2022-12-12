@@ -1,6 +1,7 @@
 // import {bible} from './rst'
 import {enBible} from './en_bbe'
 import {ruBible} from './ru_synodal'
+import {korBible} from './ko_ko'
 import {bookNames} from './bookDict' 
 
 const rndNum = (a: number, b: number) => Math.floor(Math.random()* (a-b)+b) 
@@ -47,6 +48,10 @@ export const getVerse = (lang: string) : {text: string, chapter: string} => {
             bible = ruBible
             bookLang = 'rus'
             break;
+        case 'kor':
+            bible = korBible
+            bookLang = 'kor'
+            break;
         default:
             bible = enBible
             bookLang = 'en'
@@ -61,6 +66,8 @@ export const getVerse = (lang: string) : {text: string, chapter: string} => {
 
     // verseId = rndNum(0, chapter.length)
     const verse = chapter[verseId]
+
+    verse.replaceAll('&#x27;', '`')
 
     const bookName = bookNames.find(x => x.abbr === bible[bookId].abbrev) as IBookName
 
