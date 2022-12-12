@@ -1,15 +1,70 @@
-import {bible} from './rst'
+// import {bible} from './rst'
+import {enBible} from './en_bbe'
+import {ruBible} from './ru_synodal'
+import {bookNames} from './bookDict' 
 
 const rndNum = (a: number, b: number) => Math.floor(Math.random()* (a-b)+b) 
 
-export const getRandomVerse = () : {text: string, chapter: string} => {
-  const books = bible.Books
+interface IBible {
+    abbrev: string,
+    chapters: string[][],
+    name: string
+}
 
-  const book = books[rndNum(0, books.length)]
+interface IBookName {
+    abbr: string, 
+    name: string,
+    en: string,
+    rus: string
+}
 
-  const chapter = book['Chapters'][rndNum(0, book['Chapters'].length)]
+let bookId = 0
+let chapterId = 0
+let verseId = 0
 
-  const verse = chapter['Verses'][rndNum(0, chapter.Verses.length)]
+export const randomizeVerse = () => {
+    bookId = rndNum(0, enBible.length)
 
-  return {text: verse.Text, chapter: `${book.BookName} ${chapter.ChapterId}:${verse.VerseId}`}
+    const chapters = enBible[bookId].chapters
+
+    chapterId = rndNum(0, chapters.length)
+    const chapter = chapters[chapterId]
+
+    verseId = rndNum(0, chapter.length)
+}
+
+export const getVerse = (lang: string) : {text: string, chapter: string} => {
+
+    let bible: IBible[] = []
+    let bookLang = ''
+
+    switch (lang) {
+        case 'en':
+            bible = enBible
+            bookLang = 'en'
+            break;
+        case 'rus' :
+            bible = ruBible
+            bookLang = 'rus'
+            break;
+        default:
+            bible = enBible
+            bookLang = 'en'
+    }
+
+    // bookId = rndNum(0, bible.length)
+
+    const chapters = bible[bookId].chapters
+
+    // chapterId = rndNum(0, chapters.length)
+    const chapter = chapters[chapterId]
+
+    // verseId = rndNum(0, chapter.length)
+    const verse = chapter[verseId]
+
+    const bookName = bookNames.find(x => x.abbr === bible[bookId].abbrev) as IBookName
+
+    const title = bookName[bookLang as keyof typeof bookName]
+
+    return {text: verse, chapter: `${title} ${chapterId+1}:${verseId+1}`}
 }
