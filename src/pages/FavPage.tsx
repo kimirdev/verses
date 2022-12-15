@@ -6,7 +6,7 @@ export default function FavPage(props: {color: string, lang: string}) {
     const [keys, setKeys] = useState(getAllKeys())
 
     return (
-        <div>
+        <div style={{transition: "all 1s ease"}}>
             {keys.map(x => <FavBox key={x} color={props.color} 
                 delete={() => {localStorage.removeItem(x); setKeys(getAllKeys())}} 
                 verse={getVerseByKey(props.lang, x)} lang={props.lang} 
